@@ -54,3 +54,12 @@ configure "git" ".config/git"
 configure "tmux" ".tmux.conf"
 configure "zsh" ".zshrc"
 configure "oh-my-zsh custom files" ".oh-my-zsh/custom"
+configure "ssh-config" ".ssh/config"
+
+if confirm "Should I create ssh keys?"; then
+	ssh-keygen -t rsa -b 4096 -C "github@henri.mails-schmidt.de" -f "$HOME/.ssh/id_rsa_github"
+	echo "please add the key to your github account"
+fi
+
+echo "Don't forget to unlock the repository with 'git-crypt unlock KEYFILE'"
+
