@@ -4,6 +4,9 @@ echo "Installing basics for MacOS"
 echo "Installing homebrew..."
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
+echo "Installing git-crypt"
+brew install git-crypt
+
 echo "Installing zsh"
 brew install zsh
 echo "Setting zsh as default shell"
