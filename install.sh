@@ -48,13 +48,12 @@ if confirm "Do you want to install the tools?"; then
 	source "$DIR/install_$OS.sh"
 fi
 
-exit 1
 configure "neovim" ".config/nvim"
-configure "git" ".config/git"
+# configure "git" ".config/git"
 configure "tmux" ".tmux.conf"
 configure "zsh" ".zshrc"
 configure "oh-my-zsh custom files" ".oh-my-zsh/custom"
-configure "ssh-config" ".ssh/config"
+# configure "ssh-config" ".ssh/config"
 
 if confirm "Should I create ssh keys?"; then
 	ssh-keygen -t rsa -b 4096 -C "github@henri.mails-schmidt.de" -f "$HOME/.ssh/id_rsa_github"
