@@ -19,3 +19,6 @@ brew install neovim
 
 echo "Installing tmux"
 brew install tmux
+
+echo "Installing silversearcher"
+brew install the_silver_searcher

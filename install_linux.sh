@@ -3,4 +3,5 @@
 echo "Installing git-crypt"
 apt install git-crypt
 
-echo "Installing "
+echo "Installing silversearcher"
+apt install silversearcher-ag

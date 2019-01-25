@@ -21,6 +21,8 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'natebosch/vim-lsc'
 Plug 'editorconfig/editorconfig-vim'
 
+Plug 'mileszs/ack.vim'
+
 " Language plugins
 Plug 'rust-lang/rust.vim'
 Plug 'tpope/vim-markdown'
@@ -41,6 +43,12 @@ syntax on
 set background=dark
 let g:solarized_termcolors=256
 colorscheme solarized
+
+" ack config
+
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
 
 " Rust config
 let g:rustfmt_autosave = 1
