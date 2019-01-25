@@ -34,6 +34,8 @@ Plug 'frankier/neovim-colors-solarized-truecolor-only'
 
 call plug#end()
 
+let g:deoplete#enable_at_startup = 1
+
 set termguicolors
 syntax on
 set background=dark
@@ -63,6 +65,8 @@ let g:lsc_auto_map = {
     \ 'Completion': 'completefunc',
     \}
 
+autocmd filetype typescript nnoremap <buffer> gd :TSDef<CR>
+
 set updatetime=100
 
 " NERDTree
@@ -78,7 +82,7 @@ set smartindent
 
 " typescript
 " let g:nvim_typescript#type_info_on_hold = 1
-" let g:nvim_typescript#edefault_mappings = 1
+let g:nvim_typescript#default_mappings = 1
 
 " Shortcuts
 let mapleader=" "
