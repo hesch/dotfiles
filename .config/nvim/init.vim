@@ -21,6 +21,7 @@ Plug 'Shougo/deoplete.nvim'
 Plug 'natebosch/vim-lsc'
 Plug 'editorconfig/editorconfig-vim'
 
+Plug 'sbdchd/neoformat'
 Plug 'mileszs/ack.vim'
 
 " Language plugins
@@ -48,6 +49,13 @@ colorscheme solarized
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
+endif
+
+" gitgutter config
+if exists('&signcolumn')  " Vim 7.4.2201
+  set signcolumn=yes
+else
+  let g:gitgutter_sign_column_always = 1
 endif
 
 " Rust config
