@@ -4,10 +4,8 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
 configure() {
 	echo "Configuring $1..."
-	if [[ -d "$HOME/$2" ]]; then
-		rm -rf "$HOME/$2"
-		ln -sf "$DIR/$2" "$HOME/$2"
-	fi
+	rm -rf "$HOME/$2"
+	ln -sf "$DIR/$2" "$HOME/$2"
 }
 
 confirm() {
