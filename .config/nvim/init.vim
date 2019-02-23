@@ -2,6 +2,8 @@ filetype plugin indent on
 set number
 set relativenumber
 
+let s:macos = has("unix") && (system("uname") == "Darwin\n")
+
 " install vim-plug, if not installed
 if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
   silent !curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
@@ -33,17 +35,23 @@ Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'OmniSharp/omnisharp-vim'
 
 " Color scheme
-" Plug 'altercation/vim-colors-solarized'
-Plug 'frankier/neovim-colors-solarized-truecolor-only'
+if s:macos
+  Plug 'altercation/vim-colors-solarized'
+else
+  Plug 'frankier/neovim-colors-solarized-truecolor-only'
+endif
 
 call plug#end()
 
 let g:deoplete#enable_at_startup = 1
 
-set termguicolors
+if !s:macos
+  set termguicolors
+  let g:solarized_termcolors=256
+endif
+
 syntax on
 set background=dark
-let g:solarized_termcolors=256
 colorscheme solarized
 
 " ack config
