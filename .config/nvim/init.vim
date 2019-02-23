@@ -30,6 +30,7 @@ Plug 'tpope/vim-markdown'
 Plug 'vim-scripts/nginx.vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
+Plug 'OmniSharp/omnisharp-vim'
 
 " Color scheme
 " Plug 'altercation/vim-colors-solarized'
