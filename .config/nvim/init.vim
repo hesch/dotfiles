@@ -83,12 +83,22 @@ let g:lsc_auto_map = {
     \ 'PreviousReference': '#',
     \ 'FindImplementations': 'gI',
     \ 'FindCodeActions': 'ga',
-    \ 'DocumentSymbol': 'go',
+    \ 'DocumentSymbol': 'K',
     \ 'WorkspaceSymbol': 'gS',
     \ 'ShowHover': 'v:true',
     \ 'SignatureHelp': '<C-m>',
     \ 'Completion': 'completefunc',
     \}
+
+  call deoplete#custom#option('sources', {
+    \ 'cs': ['omnisharp'],
+    \ })
+
+autocmd filetype cs nnoremap <buffer> gd :OmniSharpGotoDefinition<CR>
+autocmd filetype cs nnoremap <buffer> gI :OmniSharpFindImplementations<CR>
+autocmd filetype cs nnoremap <buffer> K :OmniSharpDocumentation<CR>
+autocmd filetype cs nnoremap <buffer> ga :OmniSharpGetCodeActions<CR>
+autocmd filetype cs nnoremap <buffer> <leader>cu :OmniSharpFixUsings<CR>
 
 autocmd filetype typescript nnoremap <buffer> gd :TSDef<CR>
 
@@ -122,7 +132,7 @@ noremap <Down> <Nop>
 noremap <Right> <Nop>
 noremap <Left> <Nop>
 
-nnoremap <A-a> :NERDTreeToggle<CR>
-nnoremap <A-s> :NERDTreeFind<CR>
+nnoremap <leader>a :NERDTreeToggle<CR>
+nnoremap <leader>s :NERDTreeFind<CR>
 
 nnoremap <leader>ti :TSImport<CR>
