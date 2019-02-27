@@ -22,6 +22,7 @@ Plug 'mhinz/vim-startify'
 Plug 'Shougo/deoplete.nvim'
 Plug 'natebosch/vim-lsc'
 Plug 'editorconfig/editorconfig-vim'
+Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 Plug 'sbdchd/neoformat'
 Plug 'mileszs/ack.vim'
