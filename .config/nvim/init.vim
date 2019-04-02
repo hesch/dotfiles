@@ -56,11 +56,11 @@ set background=dark
 colorscheme solarized
 
 " ack config
-function! find_git_root()
+function! Find_git_root()
   return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
 endfunction
 
-command! -nargs=1 Ag execute "Ack <args> " . find_git_root()
+command! -nargs=1 Ag execute "Ack <args> " . Find_git_root()
 
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
