@@ -62,6 +62,8 @@ endfunction
 
 command! -nargs=1 Ag execute "Ack <args> " . Find_git_root()
 
+let g:ackhighlight = 1
+
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
