@@ -18,5 +18,8 @@ apt install neovim
 echo "Installing tmux"
 apt install tmux
 
+echo "Installing tmux plugin manager"
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 echo "Installing silversearcher"
 apt install silversearcher-ag

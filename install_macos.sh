@@ -20,5 +20,8 @@ brew install neovim
 echo "Installing tmux"
 brew install tmux
 
+echo "Installing tmux plugin manager"
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+
 echo "Installing silversearcher"
 brew install the_silver_searcher
