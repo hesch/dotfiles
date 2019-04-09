@@ -122,6 +122,7 @@ let g:NERDTreeDirArrowCollapsible = ''
 " some settings
 set shiftwidth=2
 set smartindent
+set undofile
 
 " typescript
 " let g:nvim_typescript#type_info_on_hold = 1
