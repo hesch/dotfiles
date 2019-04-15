@@ -68,6 +68,8 @@ if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
 
+nnoremap <C-f> :Ack<space>
+
 " gitgutter config
 if exists('&signcolumn')  " Vim 7.4.2201
   set signcolumn=yes
