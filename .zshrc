@@ -85,6 +85,9 @@ source $ZSH/oh-my-zsh.sh
 
 alias vim=nvim
 
+# git give changelog
+alias ggcl="git log --merges release..master --format=\"%B\" | sed \"s/Merge branch '\(.*\)'.*/`printf '\033[32m'`\1:`printf '\033[0m'`/g\" | sed \"/^$/d\""
+
 export EDITOR='nvim'
 
 export PATH="$(yarn global bin):$PATH"
