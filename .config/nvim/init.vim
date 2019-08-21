@@ -35,6 +35,7 @@ Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'OmniSharp/omnisharp-vim'
 Plug 'beyondmarc/hlsl.vim'
+Plug 'vim-latex/vim-latex'
 
 " Color scheme
 if s:macos
