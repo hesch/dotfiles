@@ -25,7 +25,7 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'prettier/vim-prettier', { 'do': 'yarn install' }
 
 Plug 'sbdchd/neoformat'
-Plug 'mileszs/ack.vim'
+Plug 'jremmen/vim-ripgrep'
 
 " Language plugins
 Plug 'rust-lang/rust.vim'
@@ -55,20 +55,7 @@ syntax on
 set background=dark
 colorscheme solarized
 
-" ack config
-function! Find_git_root()
-  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
-endfunction
-
-command! -nargs=1 Ag execute "Ack <args> " . Find_git_root()
-
-let g:ackhighlight = 1
-
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
-
-nnoremap <C-f> :Ack<space>
+nnoremap <C-f> :Rg<space>
 
 " gitgutter config
 if exists('&signcolumn')  " Vim 7.4.2201
