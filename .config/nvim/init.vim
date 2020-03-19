@@ -34,6 +34,7 @@ Plug 'vim-scripts/nginx.vim'
 Plug 'HerringtonDarkholme/yats.vim'
 Plug 'mhartington/nvim-typescript', {'do': './install.sh'}
 Plug 'OmniSharp/omnisharp-vim'
+Plug 'beyondmarc/hlsl.vim'
 
 " Color scheme
 if s:macos
@@ -100,6 +101,8 @@ autocmd filetype cs nnoremap <buffer> <leader>cu :OmniSharpFixUsings<CR>
 autocmd filetype typescript nnoremap <buffer> gd :TSDef<CR>
 
 set updatetime=100
+
+autocmd BufNewFile,BufRead *.compute set syntax=hlsl
 
 " NERDTree
 " let g:NERDTreeDirArrowExpandable = ''
