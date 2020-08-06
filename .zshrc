@@ -75,6 +75,9 @@ source $ZSH/oh-my-zsh.sh
 # export SSH_KEY_PATH="~/.ssh/dsa_id"
 # enable ssh-agent
 
+#check for wsl stuff
+[ -n ${WSL_AUTH_SOCK} ] && export SSH_AUTH_SOCK=${WSL_AUTH_SOCK}
+
 ssh-add -l &>/dev/null
 if [ "$?" = 2 ]; then
   test -r ~/.ssh/ssh-agent && \
