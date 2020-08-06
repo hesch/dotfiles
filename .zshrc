@@ -91,6 +91,10 @@ if [ "$?" = 2 ]; then
   fi
 fi
 
+if grep -q Microsoft /proc/version; then
+  # inside WSL
+  export DOCKER_HOST="tcp://localhost:2375"
+fi
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
