@@ -112,5 +112,5 @@ alias ggcl="git log --format=\"%B\" --merges release..master | sed \"/^$/d;s/.*'
 
 export EDITOR='nvim'
 
-export PATH="$(yarn global bin):$PATH"
+export PATH="$(yarn global bin):~/.local/bin:$PATH"
 
