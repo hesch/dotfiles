@@ -124,6 +124,9 @@ let g:nvim_typescript#default_mappings = 1
 " Shortcuts
 let mapleader=" "
 
+" Bind this to a useless key. Otherwise <C-j> will be mapped to this
+nmap <F2> <Plug>IMAP_JumpForward
+
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
