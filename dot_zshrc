@@ -1,3 +1,6 @@
+# Analyse slow startup
+# zmodload zsh/zprof
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH
 
@@ -65,6 +68,9 @@ ZSH_THEME="dst"
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
 
+# Disable auto update for faster startup
+DISABLE_AUTO_UPDATE="true"
+
 # Which plugins would you like to load?
 # Standard plugins can be found in $ZSH/plugins/
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
@@ -78,10 +84,9 @@ plugins=(
 	encode64
 	macos
 	nmap
-	per-directory-history
-	ssh-agent
 	fzf
-	nvm
+	hesch
+	ppidfy
 )
 
 zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
@@ -122,8 +127,7 @@ alias vim=nvim
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
-export NVM_DIR="$HOME/.nvm"
-[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+eval "$(fnm env --use-on-cd --shell zsh)"
 
 # Ruby stuff
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
