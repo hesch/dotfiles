@@ -1,0 +1,114 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+let mapleader=" "
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+set scrolloff=5
+
+" Do incremental searching.
+set incsearch
+
+" Highlight matches
+set hlsearch
+
+set ignorecase
+set smartcase
+
+" Don't use Ex mode, use Q for formatting.
+map Q gq
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+Plug 'tpope/vim-commentary'
+" NERDTree
+Plug 'preservim/nerdtree'
+" vim-surround
+Plug 'tpope/vim-surround'
+
+" Gives aq/iq for `'" and ab/ib for any [{(
+set mini-ai
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code action
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+
+nmap gi <Action>(GotoImplementation)
+nmap gr <Action>(FindUsages)
+" remap escape in normal mode to clear search highlights. Hopefully not used by anything else
+nnoremap <Esc> :noh<CR>
+
+nmap <leader>tr <Action>(ContextRun)
+nmap <leader>td <Action>(ContextDebug)
+nmap <leader>tl <Action>(ActivateRunToolWindow)
+nmap <leader>ts <Action>(RunAllTests)
+
+nmap <leader>m <Action>(MaximizeToolWindow)
+
+nmap <leader>rt <Action>(Gradle.ExecuteTask)
+nmap <leader>ra <Action>(Rerun)
+nmap <leader>rr <Action>(Run)
+nmap <leader>rd <Action>(Debug)
+
+nmap <leader>wt <Action>(ActivateTerminalToolWindow)
+
+nmap <leader>gh <Action>(Compare.Selected)
+nmap <leader>gb <Action>(Annotate)
+nmap <leader>go <Action>(Diff.FocusOppositePane)
+
+map <leader>pf <Action>(GotoFile)
+map <leader>ps <Action>(FindInPath)
+map <leader>pv :NERDTreeFind<CR>
+
+nmap <leader>db <Action>(ToggleLineBreakpoint)
+nmap <leader>dr <Action>(Resume)
+nmap <leader>ds <Action>(StepOver)
+nmap <leader>di <Action>(StepInto)
+nmap <leader>do <Action>(StepOut)
+nmap <leader>dh <Action>(RunToCursor)
+
+nmap ]c <Action>(VcsShowNextChangeMarker)<Esc>
+nmap [c <Action>(VcsShowPrevChangeMarker)<Esc>
+
+nmap ]q <Action>(NextOccurence)
+nmap [q <Action>(PreviousOccurence)
+
+nmap ]d <Action>(GotoNextError)
+nmap [d <Action>(GotoPreviousError)
+
+nmap <leader>vd <Action>(ShowHoverInfo)
+nmap <leader>vca <Action>(ShowIntentionActions)
+
+imap <C-h> <Action>(ParameterInfo)
+
+imap <C-y> <Action>(EditorChooseLookupItem)
+command! Qp action CloseProject
+command! Conf edit ~/.ideavimrc
+command! Config edit ~/.ideavimrc
+command! R source ~/.ideavimrc
+
+"harpoon simulation
+nmap <leader><C-h> <Action>(ToggleBookmark1)
+nmap <leader><C-j> <Action>(ToggleBookmark2)
+nmap <leader><C-k> <Action>(ToggleBookmark3)
+nmap <leader><C-l> <Action>(ToggleBookmark4)
+nmap <C-h> <Action>(GotoBookmark1)
+nmap <C-j> <Action>(GotoBookmark2)
+nmap <C-k> <Action>(GotoBookmark3)
+nmap <C-l> <Action>(GotoBookmark4)
