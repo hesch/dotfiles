@@ -142,4 +142,9 @@ bindkey -s '\ej' "tmux-sessionizer -s 1\n"
 bindkey -s '\ek' "tmux-sessionizer -s 2\n"
 bindkey -s '\el' "tmux-sessionizer -s 3\n"
 
+alias df="date -z Asia/Tokyo '+%Y-%m-%d %H:%M:%S'"
+
+export PATH="$HOME/.rd/bin:$PATH"
+export PATH="$HOME/google-cloud-sdk/bin:$PATH"
+
 export LANG=en_US.UTF-8
