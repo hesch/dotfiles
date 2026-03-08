@@ -18,3 +18,5 @@ vim.keymap.set("n", "<M-H>", "<cmd>silent !tmux neww tmux-sessionizer -s 0<CR>")
 
 vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true })
 
+vim.keymap.set({ "n", "v" }, "<leader>cs", [[:s/\([({\[]\)\s*/\1\r/ | s/,\s*/,\r/g | s/\s*\([\])}]\)/\r\1/<CR>=%]])
+

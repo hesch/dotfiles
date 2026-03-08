@@ -83,6 +83,9 @@ nmap <leader>di <Action>(StepInto)
 nmap <leader>do <Action>(StepOut)
 nmap <leader>dh <Action>(RunToCursor)
 
+
+noremap <leader>cs :s/\([({\[]\)\s*/\1\r/ | s/,\s*/,\r/g | s/\s*\([\])}]\)/\r\1/<CR>=%
+
 nmap ]c <Action>(VcsShowNextChangeMarker)<Esc>
 nmap [c <Action>(VcsShowPrevChangeMarker)<Esc>
 
