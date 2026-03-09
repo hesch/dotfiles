@@ -75,6 +75,7 @@ nmap <leader>go <Action>(Diff.FocusOppositePane)
 map <leader>pf <Action>(GotoFile)
 map <leader>ps <Action>(FindInPath)
 map <leader>pv :NERDTreeFind<CR>
+map <leader>pt :NERDTreeToggle<CR>
 
 nmap <leader>db <Action>(ToggleLineBreakpoint)
 nmap <leader>dr <Action>(Resume)
@@ -82,9 +83,6 @@ nmap <leader>ds <Action>(StepOver)
 nmap <leader>di <Action>(StepInto)
 nmap <leader>do <Action>(StepOut)
 nmap <leader>dh <Action>(RunToCursor)
-
-
-noremap <leader>cs :s/\([({\[]\)\s*/\1\r/ | s/,\s*/,\r/g | s/\s*\([\])}]\)/\r\1/<CR>=%
 
 nmap ]c <Action>(VcsShowNextChangeMarker)<Esc>
 nmap [c <Action>(VcsShowPrevChangeMarker)<Esc>
@@ -97,6 +95,35 @@ nmap [d <Action>(GotoPreviousError)
 
 nmap <leader>vd <Action>(ShowHoverInfo)
 nmap <leader>vca <Action>(ShowIntentionActions)
+
+
+noremap <leader>cs :s/\([({\[]\)\s*/\1\r/ | s/,\s*/,\r/g | s/\s*\([\])}]\)/\r\1/<CR>=%
+map <leader>cr <Action>(RenameElement)
+map <leader>co <Action>(OptimizeImports)
+map <leader>cn <Action>(Inline)
+map <leader>civ <Action>(IntroduceVariable)
+map <leader>cic <Action>(IntroduceConstant)
+map <leader>cif <Action>(IntroduceField)
+" nmap <leader>cfp <Action>(IntroduceFunctionalParameter)
+" nmap <leader>cfv <Action>(IntroduceFunctionalVariable)
+map <leader>cip <Action>(IntroduceParameter)
+" nmap <leader>cio <Action>(IntroduceParameterObject)
+
+" Maven specific:
+" nmap <leader>cip <Action>(IntroduceProperty)
+
+" TS specifc to introduce type
+map <leader>cit <Action>(IntroduceTypeAlias)
+
+" nmap <leader>cec <Action>(ExtractClass)
+map <leader>cef <Action>(ExtractFunction)
+map <leader>cel <Action>(ExtractFunctionToScope)
+" nmap <leader>cen <Action>(ExtractInclude)
+map <leader>cei <Action>(ExtractInterface)
+map <leader>cem <Action>(ExtractMethod)
+map <leader>ces <Action>(ExtractSuperclass)
+
+map <C-e> <Action>(HideAllWindows)
 
 imap <C-h> <Action>(ParameterInfo)
 
