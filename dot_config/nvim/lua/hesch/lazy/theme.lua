@@ -13,11 +13,15 @@ return {
             dimInactive = false,         -- dim inactive window `:h hl-NormalNC`
             terminalColors = true,       -- define vim.g.terminal_color_{0,17}
             colors = {                   -- add/modify theme and palette colors
-                palette = {},
+                palette = {
+                    waveBlue1 = "#293d59"
+                },
                 theme = { wave = {}, lotus = {}, dragon = {}, all = {} },
             },
             overrides = function(colors) -- add/modify highlights
-                return {}
+                return {
+                    LineNr = { fg='lightgray', bold=true }
+                }
             end,
             theme = "wave",              -- Load "wave" theme
             background = {               -- map the value of 'background' option to a theme
@@ -28,6 +32,5 @@ return {
 
         -- setup must be called before loading
         vim.cmd("colorscheme kanagawa")
-        vim.api.nvim_set_hl(0, 'LineNr', { fg='white', bold=true })
     end
 }
