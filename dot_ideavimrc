@@ -97,7 +97,7 @@ nmap <leader>vd <Action>(ShowHoverInfo)
 nmap <leader>vca <Action>(ShowIntentionActions)
 
 
-noremap <leader>cs :s/\([({\[]\)\s*/\1\r/ | s/,\s*/,\r/g | s/\s*\([\])}]\)/\r\1/<CR>=%
+noremap <leader>cs :s/\([({\[,]\)\s*/\1\r/g<CR>:s/\s*\([\])}]\)/\r\1/<CR>vab=
 map <leader>cr <Action>(RenameElement)
 map <leader>co <Action>(OptimizeImports)
 map <leader>cn <Action>(Inline)
