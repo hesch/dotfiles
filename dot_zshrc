@@ -156,3 +156,7 @@ export LANG=en_US.UTF-8
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/henri.schmidt/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+
+# Load Angular CLI autocompletion.
+source <(ng completion script)
