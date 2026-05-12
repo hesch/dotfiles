@@ -24,10 +24,6 @@ return {
         config = function ()
             require("neotest").setup({
                 adapters = {
-                    require("neotest-kotlin"),
-                    require("neotest-java")({
-                        -- config here
-                    }),
                     require("neotest-jest")({
                         jestCommand = "npm test --",
                         jestArguments = function(defaultArguments, context)
@@ -41,6 +37,10 @@ return {
                         isTestFile = require("neotest-jest.jest-util").defaultIsTestFile,
                     }),
                     require("neotest-vitest"),
+                    require("neotest-kotlin"),
+                    require("neotest-java")({
+                        -- config here
+                    }),
                 }
             })
             vim.keymap.set("n", "<leader>tr", function()
