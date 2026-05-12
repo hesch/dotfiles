@@ -15,7 +15,7 @@ return {
     "neovim/nvim-lspconfig",
     branch = "master",
     dependencies = {
-        'linrongbin16/lsp-progress.nvim',
+        "linrongbin16/lsp-progress.nvim",
         "neovim/nvim-lspconfig",
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
@@ -25,7 +25,8 @@ return {
         "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
         "hrsh7th/cmp-nvim-lsp",
-        "L3MON4D3/LuaSnip"
+        "L3MON4D3/LuaSnip",
+        "nvim-telescope/telescope.nvim",
     },
     config = function()
         vim.lsp.config['apigee-ls'] = {
@@ -41,9 +42,25 @@ return {
         vim.lsp.enable('apigee-ls')
         require('lsp-progress').setup()
 
-        vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end, opts)
-        vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
-        vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
+        vim.keymap.set("n", "<leader>vd", function() vim.diagnostic.open_float() end)
+        vim.keymap.set("n", "[d", function() vim.diagnostic.jump({count = -1}) end)
+        vim.keymap.set("n", "]d", function() vim.diagnostic.jump({count = 1 }) end)
+
+        local telescope = require("telescope.builtin")
+        local themes = require("telescope.themes")
+        local function telescope_results(options)
+            vim.fn.setqflist({}, ' ', options)
+            if #options.items == 1 then
+                vim.cmd.cfirst()
+                return
+            end
+
+            telescope.quickfix(
+                themes.get_dropdown({
+                    initial_mode = "normal",
+                })
+            );
+        end
 
         vim.api.nvim_create_autocmd('LspAttach', {
             desc = 'LSP actions',
@@ -52,15 +69,101 @@ return {
 
                 -- these will be buffer-local keybindings
                 -- because they only work if you have an active language server
+                local function outgoing_calls(callHierarchyPreparationResult)
+                    vim.lsp.buf_request(
+                        event.buf,
+                        vim.lsp.protocol.Methods.callHierarchy_outgoingCalls,
+                        { item = callHierarchyPreparationResult[1] },
+                        function(err, calls, ctx)
+                            if err or not calls or vim.tbl_isempty(calls) then
+                                return
+                            end
 
-                vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
-                vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration() end, opts)
-                vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation() end, opts)
-                vim.keymap.set("n", "gr", function() vim.lsp.buf.references() end, opts)
+                            local locations = {}
+                            for _, callsite in ipairs(calls) do
+                                local to = callsite.to
+                                table.insert(locations, {
+                                    filename = vim.uri_to_fname(to.uri),
+                                    lnum = to.selectionRange.start.line + 1,
+                                    col = to.selectionRange.start.character,
+                                    end_lnum = to.selectionRange["end"].line + 1,
+                                    end_col = to.selectionRange["end"].character,
+                                    text = to.name,
+                                })
+                            end
+
+                            telescope_results({
+                                title = "Outgoing calls",
+                                items = locations,
+                            })
+
+                        end)
+                end
+                
+                local function incoming_calls(callHierarchyPreparationResult)
+                    vim.lsp.buf_request(
+                        event.buf,
+                        vim.lsp.protocol.Methods.callHierarchy_incomingCalls,
+                        { item = callHierarchyPreparationResult[1] },
+                        function(err, calls, ctx)
+                            if err or not calls or vim.tbl_isempty(calls) then
+                                return
+                            end
+
+
+                            local locations = {}
+                            for _, callsite in ipairs(calls) do
+                                for _, range in ipairs(callsite.fromRanges) do
+                                    table.insert(locations, {
+                                        filename = vim.uri_to_fname(callsite.from.uri),
+                                        lnum = range.start.line + 1,
+                                        col = range.start.character,
+                                        end_lnum = range["end"].line + 1,
+                                        end_col = range["end"].character,
+                                        text = callsite.from.name,
+                                    })
+                                end
+                            end
+
+                            telescope_results({
+                                title = "Incoming calls",
+                                items = locations,
+                            })
+
+                        end)
+                end
+
+                local function ch_helper(callback)
+                    return function()
+                        local params = vim.lsp.util.make_position_params()
+
+                        vim.lsp.buf_request(
+                            event.buf,
+                            vim.lsp.protocol.Methods.textDocument_prepareCallHierarchy,
+                            params,
+                            function(err, result, ctx)
+                                if err or not result or vim.tbl_isempty(result) then
+                                    return
+                                end
+                                callback(result)
+                            end
+                        )
+                    end
+                end
+
+                vim.keymap.set("n", "gh", ch_helper(incoming_calls), opts)
+                vim.keymap.set("n", "gH", ch_helper(outgoing_calls), opts)
+
+                vim.keymap.set("n", "gd", function() vim.lsp.buf.definition({ on_list = telescope_results }) end, opts)
+                vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration({ on_list = telescope_results }) end, opts)
+                vim.keymap.set("n", "gi", function() vim.lsp.buf.implementation({ on_list = telescope_results }) end, opts)
+                vim.keymap.set("n", "gr", function() vim.lsp.buf.references(nil, { on_list = telescope_results }) end, opts)
+                --vim.keymap.set("n", "gh", function() vim.lsp.buf.incoming_calls() end, opts)
+                --vim.keymap.set("n", "gH", function() vim.lsp.buf.outgoing_calls() end, opts)
                 vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
                 vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
                 vim.keymap.set("n", "<leader>vca", function() vim.lsp.buf.code_action() end, opts)
-                vim.keymap.set("n", "<leader>vrn", function() vim.lsp.buf.rename() end, opts)
+                vim.keymap.set("n", "<leader>cr", function() vim.lsp.buf.rename() end, opts)
                 vim.keymap.set("i", "<C-h>", function() vim.lsp.buf.signature_help() end, opts)
             end
         })

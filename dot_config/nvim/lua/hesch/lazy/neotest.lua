@@ -19,6 +19,7 @@ return {
             "codymikol/neotest-kotlin",
             "rcasia/neotest-java",
             "nvim-neotest/neotest-jest",
+            "marilari88/neotest-vitest",
         },
         config = function ()
             require("neotest").setup({
@@ -39,6 +40,7 @@ return {
                         end,
                         isTestFile = require("neotest-jest.jest-util").defaultIsTestFile,
                     }),
+                    require("neotest-vitest"),
                 }
             })
             vim.keymap.set("n", "<leader>tr", function()
