@@ -85,8 +85,11 @@ plugins=(
 	macos
 	nmap
 	fzf
+    chezmoi
+{{ if (default false .work_machine) }}
 	hesch
 	ppidfy
+{{ end }}
 )
 
 zstyle :omz:plugins:ssh-agent ssh-add-args --apple-load-keychain
