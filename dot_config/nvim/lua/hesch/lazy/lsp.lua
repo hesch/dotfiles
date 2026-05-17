@@ -2,14 +2,6 @@ local root_files = {
   '.git',
 }
 
-function RestartLsp()
-    local bufnr = vim.api.nvim_get_current_buf()
-    for _, client in pairs(vim.lsp.get_active_clients({ bufnr = bufnr })) do
-        local config = client.config
-        client.stop()
-        vim.lsp.start(config)  -- start it again with same config
-    end
-end
 
 return {
     "neovim/nvim-lspconfig",
@@ -33,7 +25,7 @@ return {
             root_markers = { ".apigee-ls" },
             on_attach = function (client, bufnr)
                 print('apigee-ls attached', client.name, bufnr)
-                vim.keymap.set("n", "<leader>r", RestartLsp)
+                vim.keymap.set("n", "<leader>r", "<cmd>lsp restart apigee-ls<CR>")
             end
         }
 
