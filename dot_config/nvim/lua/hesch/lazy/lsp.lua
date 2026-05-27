@@ -32,7 +32,7 @@ return {
         vim.lsp.config['apigee-ls'] = {
             cmd = { "apigee-ls-dev" },
             filetypes = { "xml" },
-            root_markers = { ".git" },
+            root_markers = { ".apigee-ls" },
             on_attach = function (client, bufnr)
                 print('apigee-ls attached', client.name, bufnr)
                 vim.keymap.set("n", "<leader>r", RestartLsp)
