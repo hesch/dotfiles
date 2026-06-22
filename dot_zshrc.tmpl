@@ -137,14 +137,10 @@ export PATH="$PATH:$HOME/.local/bin"
 # Add go bin
 export PATH="$PATH:$HOME/go/bin"
 
-#tmux sessionizer support
-bindkey -s ^f "tmux-sessionizer\n"
-bindkey -s '\eh' "tmux-sessionizer -s 0\n"
-bindkey -s '\ej' "tmux-sessionizer -s 1\n"
-bindkey -s '\ek' "tmux-sessionizer -s 2\n"
-bindkey -s '\el' "tmux-sessionizer -s 3\n"
-
 alias df="date -z Asia/Tokyo '+%Y-%m-%d %H:%M:%S'"
+
+# rebase the current MR branch on main
+alias grbmr="gcm && gl && gsw - && grbm"
 
 export PATH="$HOME/.rd/bin:$PATH"
 export PATH="$HOME/google-cloud-sdk/bin:$PATH"
@@ -160,5 +156,9 @@ export PATH="/Users/henri.schmidt/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 
 
-# Load Angular CLI autocompletion.
-source <(ng completion script)
+# Load Angular CLI autocompletion, if ng is installed
+if (( $+commands[ng] )); then
+    source <(ng completion script)
+fi
+
+
