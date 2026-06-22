@@ -99,7 +99,7 @@ return {
 
                         end)
                 end
-                
+
                 local function incoming_calls(callHierarchyPreparationResult)
                     vim.lsp.buf_request(
                         event.buf,
@@ -153,6 +153,8 @@ return {
 
                 vim.keymap.set("n", "gh", ch_helper(incoming_calls), opts)
                 vim.keymap.set("n", "gH", ch_helper(outgoing_calls), opts)
+
+                vim.keymap.set("n", "<leader>vt", function() vim.diagnostic.enable(not vim.diagnostic.is_enabled()) end, opts)
 
                 vim.keymap.set("n", "gd", function() vim.lsp.buf.definition({ on_list = telescope_results }) end, opts)
                 vim.keymap.set("n", "gD", function() vim.lsp.buf.declaration({ on_list = telescope_results }) end, opts)
