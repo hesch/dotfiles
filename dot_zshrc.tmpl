@@ -126,39 +126,42 @@ alias vim=nvim
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
+export LANG=en_US.UTF-8
+
+function add_path_if_exists() {
+    [[ -d "$1" ]] && export PATH="$1:$PATH"
+}
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 eval "$(fnm env --use-on-cd --shell zsh)"
 
 # Ruby stuff
-export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
-export PATH="/opt/homebrew/lib/ruby/gems/3.3.0/bin:$PATH"
+add_path_if_exists "/opt/homebrew/opt/ruby/bin"
+add_path_if_exists "/opt/homebrew/lib/ruby/gems/3.3.0/bin"
 
-export PATH="$PATH:$HOME/.local/bin"
+add_path_if_exists "$HOME/.local/bin"
 # Add go bin
-export PATH="$PATH:$HOME/go/bin"
+add_path_if_exists "HOME/go/bin"
 
-alias df="date -z Asia/Tokyo '+%Y-%m-%d %H:%M:%S'"
 
-# rebase the current MR branch on main
-alias grbmr="gcm && gl && gsw - && grbm"
+add_path_if_exists "$HOME/google-cloud-sdk/bin"
 
-export PATH="$HOME/.rd/bin:$PATH"
-export PATH="$HOME/google-cloud-sdk/bin:$PATH"
-
-{{ if (default false .work_machine) }}
-export NODE_EXTRA_CA_CERTS="$HOME/.config/tls/certs/ZerobankCA.pem"
+{{ if .cacert }}
+export NODE_EXTRA_CA_CERTS="{{ .cacert }}"
 {{ end }}
 
-export LANG=en_US.UTF-8
-
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/henri.schmidt/.rd/bin:$PATH"
+export PATH="/Users/{{ .chezmoi.username }}/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
-
 
 # Load Angular CLI autocompletion, if ng is installed
 if (( $+commands[ng] )); then
     source <(ng completion script)
 fi
 
+# Custom aliases
+alias df="date -z Asia/Tokyo '+%Y-%m-%d %H:%M:%S'"
+
+# rebase the current MR branch on main
+alias grbmr="gcm && gl && gsw - && grbm"
 
