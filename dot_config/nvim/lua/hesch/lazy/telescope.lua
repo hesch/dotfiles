@@ -7,6 +7,13 @@ return {
     },
     config = function()
         require('telescope').setup({
+            defaults = {
+                mappings = {
+                    i = {
+                        ["<C-s>"] = require("telescope.actions").send_selected_to_qflist + require("telescope.actions").open_qflist,
+                    }
+                }
+            },
             extensions = {
                 ["ui-select"] = {
                     require("telescope.themes").get_dropdown {
