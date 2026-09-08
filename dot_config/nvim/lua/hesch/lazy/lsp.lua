@@ -16,7 +16,6 @@ return {
     branch = "master",
     dependencies = {
         "linrongbin16/lsp-progress.nvim",
-        "neovim/nvim-lspconfig",
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "hrsh7th/cmp-nvim-lsp",
@@ -24,7 +23,6 @@ return {
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/nvim-cmp",
-        "hrsh7th/cmp-nvim-lsp",
         "L3MON4D3/LuaSnip",
         "nvim-telescope/telescope.nvim",
     },
@@ -46,9 +44,9 @@ return {
         vim.keymap.set("n", "[d", function() vim.diagnostic.jump({count = -1}) end)
         vim.keymap.set("n", "]d", function() vim.diagnostic.jump({count = 1 }) end)
 
-        local telescope = require("telescope.builtin")
-        local themes = require("telescope.themes")
         local function telescope_results(options)
+            local telescope = require("telescope.builtin")
+            local themes = require("telescope.themes")
             vim.fn.setqflist({}, ' ', options)
             if #options.items == 1 then
                 vim.cmd.cfirst()
