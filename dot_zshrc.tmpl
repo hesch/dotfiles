@@ -144,7 +144,7 @@ add_path_if_exists "/opt/homebrew/lib/ruby/gems/3.3.0/bin"
 
 add_path_if_exists "$HOME/.local/bin"
 # Add go bin
-add_path_if_exists "HOME/go/bin"
+add_path_if_exists "$HOME/go/bin"
 
 
 add_path_if_exists "$HOME/google-cloud-sdk/bin"
@@ -168,3 +168,5 @@ alias df="date -z Asia/Tokyo '+%Y-%m-%d %H:%M:%S'"
 # rebase the current MR branch on main
 alias grbmr="gcm && gl && gsw - && grbm"
 
+# show only mainline and the provided branch in git log (compare tag with main)
+function tag-history() { git log --graph --oneline --decorate $(git merge-base $1 $(git_main_branch))^.. $(git_main_branch) $1 }
